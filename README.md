@@ -22,3 +22,5 @@ This tutorial has two main parts:
   - Includes a PNG file to visualize the database structure.  
   - Contains SQL files following the same numbered format as the previous folders, with queries to support the explanations.  
   - Also includes a `csv` folder. The purpose of this folder is to allow users to import the data into other tools or languages, or to export it if needed.
+
+![Company_database](Company_database.png)
