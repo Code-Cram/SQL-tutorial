@@ -1,0 +1,397 @@
+---------------------------------------------------------
+Types of atributes in SQL:
+---------------------------------------------------------
+INT                         -- Integer numbers.
+SMALLINT 	       -- Small integer number.
+FLOAT(N)	       -- Float number. N specifies the number of digits.
+DECIMAL(M, N)      -- Decimal numbers with fixed precision. M = total number of digits; N = digits after the decimal point.
+VARCHAR(N)           -- Text strings. N specifies the maximum number of characters.
+CHAR(N)		       -- Text strings. N specifies the exact number of characters.
+TEXT		       -- Text string. Doesn't specify the number of characters.
+BLOB                       -- Large binary data, such as images or files.
+DATE                       -- Stores dates in the format YYYY-MM-DD.
+TIME		       -- Stores time in the format HH:MM:SS.
+TIMESTAMP             -- Stores date and time in the format YYYY-MM-DD HH:MM:SS.
+ 
+---------------------------------------------------------
+Schemas and database structure:
+---------------------------------------------------------
+
+When working with a database management system (DBMS) such as MySQL,
+PostgreSQL, or pgAdmin, we use schemas to organize the database objects.
+
+A schema contains tables, views, functions, indexes, and other elements.
+Schemas are not used for “visualizing” data; instead, they organize the
+structure of the database.
+
+To visualize the relational model, we rely on tables, not on schemas.
+If the database is non-relational (for example, a graph database),
+then the structure will be different.
+
+Different DBMS tools offer different commands and interfaces:
+
+- In PostgreSQL (psql), visualization is mostly done from the terminal.
+- MySQL tends to offer more graphical and user-friendly tools.
+
+--------------------------------------------------------
+Creating tables:
+--------------------------------------------------------
+
+We can create tables using the command: "CREATE TABLE _______();". 
+In SQL, it is common practice to write keywords (CREATE, SELECT, DROP) in capital letters.
+
+Green is used for indicate the data types.
+Red is for SQL keywords (normally capital letters).
+Blue indicates user-defined variables.
+It deppends on your interface. That is my case.
+
+Also, we can eliminate tables with DROP TABLE ___________; This is useful when testing queries, since a table may already exist.
+To avoid errors, it is recommended to use: DROP TABLE IF EXISTS __________;
+
+In SQL we can modify tables with the command ALTER TABLE _______; This command is useful when we forgot some variable
+or when we need to eliminate a column. ALTER TABLE works at the same way as when we create a new table.
+
+ALTER TABLE table
+	[ADD COLUMN ({column} {value}]
+	[ADD [CONSTRAINT [symbol]] PRIMARY KEY (column,...)]
+	[ADD [CONSTRAINT [symbol]] UNIQUE (column,...)]
+	[ADD [CONSTRAINT [symbol]] FOREIGN KEY [name] (column,...) [reference]
+	[MODIFY ({column} {value} ...)]
+	[DROP CONSTRAINT constraint_name]
+	[DROP COLUMN column]
+	[DROP PRIMARY KEY]
+
+Some examples:
+
+ALTER TABLE student ADD gpa DECIMAL(3,2);
+ALTER TABLE student DROP COLUMN gpa;
+
+The first command add a new column, is a decimal atribute with 3 number, 2 of them the decimal part.
+The second command erase the column, the cappital letters are for the SQL keywords. 
+
+In "Creating_tables", the example query we have this:
+
+DROP TABLE student;
+CREATE TABLE student(
+	student_id INT,
+	name VARCHAR(25),
+	major VARCHAR(25),
+	PRIMARY KEY(student_id)
+);
+
+If we use DESCRIBE student or we use the psql terminal we would visualize this:
+
+SQL_tutorial=# \d student 
+                       Table "public.student"
+   Column   |         Type          | Collation | Nullable | Default 
+------------+-----------------------+-----------+----------+---------
+ student_id | integer               |           | not null | 
+ name       | character varying(25) |           |          | 
+ major      | character varying(25) |           |          | 
+Indexes:
+    "student_pkey" PRIMARY KEY, btree (student_id)
+
+
+SOME CONCLUSIONS:
+
+First of all, when working with SQL we often create schemas to organize our database objects.
+A schema can contain tables, views, functions, and other elements.
+We can modify a table by adding new attributes (columns) or changing their data types.
+It is also common for SQL editors to use different colors to highlight syntax elements,
+and SQL keywords are usually written in capital letters.
+
+In SQL, we can update the structure of a table, add new features, or remove columns.
+If necessary, we can delete an entire table using DROP TABLE. For conclusion, this
+part is DDL language.
+
+-------------------------------------------------------
+Adding data:
+-------------------------------------------------------
+
+Once we have created the table, we can proceed to add data. There's some useful
+commands that allow this. Our table "student" is currently empty, so to insert
+some information we use the INSERT command. One example:
+INSERT INTO student VALUES(1,'Jack','Biology');
+
+To compare to other programming language. Works as a dictionary. 
+{student_id:1, name:"Jack", major: "Biology"}
+However, in SQL the values are inserted by position, not by key.
+
+Now, if we want to visualize this information we need to use DML commands.
+The most common one is SELECT, which retrieves data. A basic SQL query is
+usually composed of three parts: SELECT, FROM, and optionally WHERE.
+
+SELECT specifies the columns we want.
+FROM specifies the table.
+WHERE specifies the conditions (if any).
+
+SELECT * FROM student; Result:
+1	"Jack"	"Biology"
+2	"kate"	"Sociology"
+3	"Claire"	"English"
+4	"Jack"	"Biology"
+5	"Mike"	"Computer Science"
+
+-------------------------------------------------------
+Constrains:
+-------------------------------------------------------
+
+As we can see, in SQL, when defining a column, we specify both its data type and any 
+constraints that apply to it. Constraints are rules that ensure the correctness and 
+integrity of the data stored in a table. In many cases, constraints are essential for
+building a valid database schema.
+
+For example, an ID column is typically the primary key of a table. It has a data
+type (such as INT or CHAR), and it also has a constraint that identifies it
+as the primary key.
+
+Some constraints commands:
+UNIQUE              			 -- This constraint doesn't allow the same value to appear in different rows of a column.
+NOT NULL          			 -- This constraint ensures that a column cannot have NULL values.
+PRIMARY KEY 	  			 -- Combines UNIQUE and NOT NULL; identifies each row uniquely in the table.
+FOREIGN KEY     			 -- Ensures that values in a column match values in another table's primary key, maintaining referential integrity.
+CHECK                 			-- Ensures that values in a column meet a specific condition (e.g., age > 0).
+DEFAULT             			-- Sets a default value for a column when no value is provided during insertion.
+AUTO_INCREMENT / SERIAL    -- Automatically generates a sequential value for each new row (used mainly for IDs).
+INDEX 					-- Creates an index on a column to speed up queries (not exactly a constraint but often used for uniqueness).
+
+-------------------------------------------------------
+Updating data:
+-------------------------------------------------------
+
+Once we have our table created with his own data we can modify as well. In SQL, we can 
+modify the structure of the table, and the data stored in it. Continuing with the student
+example, we can update the major or the name using SQL commands. This type of commmands
+modify the data, so it belongs to DML language.
+
+As before, we need a table, and a series of commands that modifies the data.
+Example: UPDATE student  SET major = 'Bio' WHERE major = 'Biology';
+Before:1 "Jack"	"Biology"
+After:1	"Jack"	"Bio"
+
+To do this operations we use comparision ops:
+=     equals
+<>   not equal
+>    greater than
+<    less than
+>=  greater than or equal
+<=  less than or equal
+
+Also we have the typical logic ops, such a AND, OR, IN...
+
+Updating data is useful when we need to modify names or adjust existing information.
+Otherwise, we would need to redefine the table with the new data.
+
+Deleting data works similarly. We need a table with data, and we can remove rows based on conditions.
+Example: DELETE FROM student WHERE major IS NULL;
+
+-------------------------------------------------------
+Deleting data:
+-------------------------------------------------------
+
+When deleting data from a relational database, you need to handle foreign key 
+constraints properly. The basic syntax is DELETE FROM table WHERE restriction; 
+but when records are referenced by other tables, you must use special constraints.
+
+DELETE ON CASCADE:
+
+With DELETE ON CASCADE, deleting a parent record automatically deletes all child 
+records that reference it. This ensures referential integrity through cascading 
+deletion. When you delete a branch, all employees in that branch are automatically deleted.
+
+Example:
+CREATE TABLE employee (
+    emp_id INT PRIMARY KEY,
+    branch_id INT,
+    FOREIGN KEY (branch_id) REFERENCES branches(branch_id) ON DELETE CASCADE
+);
+
+DELETE ON SET NULL:
+
+With DELETE ON SET NULL, deleting a parent record sets the foreign key value to 
+NULL in child records instead of deleting them. This preserves the child records 
+but removes their association. When you delete a manager, employees who reported 
+to them remain in the database with manager_id = NULL.
+
+CREATE TABLE employee (
+    emp_id INT PRIMARY KEY,
+    manager_id INT,
+    FOREIGN KEY (manager_id) REFERENCES employees(employee_id) ON DELETE SET NULL
+);
+
+Practical Example: In a company database, deleting a branch should remove all 
+its employees (CASCADE). However, deleting a manager should only nullify their 
+employees' manager assignment (SET NULL), keeping the employee records intact.
+
+-------------------------------------------------------
+Making queris:
+-------------------------------------------------------
+
+Until a momento ago, we have a simple table with 3 atributes and 5 rows. But, when we have
+a table with millions of rows and thousands of variables we need to extract the information
+as we want. And that's the principal meaning of the queries. The queries to explain in a simple
+way is code that consult the table and return the exact information as we want.
+
+Let's talk another time about SELECT, FROM and WHERE. SELECT is a special keyword, and a powerful
+one. Whit this keyword we select the information of a table, but we can select only variables of 
+a table if we want. Or we can select information of two tables if we put two tables in the FROM section.
+
+With this 3 keywords we can specify all types of information, since tables to variables or rows.
+We can extract information with the own data of our tables. And also we can order by the own column,
+in descent form and in ascend form. There are some examples in the file "6_Basic_queries.sql"
+
+-------------------------------------------------------
+Database company:
+-------------------------------------------------------
+In this part of the tutorial, we are going to create a typical company database.
+Inside the database_company folder, you will find the main query file.
+This file, Company_database.sql, creates the core structure of the database.
+
+To build these tables, we use several constraints such as FOREIGN KEY, PRIMARY KEY, and NOT NULL.
+We also specify the data types for each column and define the delete behavior on each foreign key
+reference to avoid issues when working with SQL.
+
+If you want to see the structure of the database, you can check the file Company_database.png
+in the database_company folder.
+
+Following our steps, we executed several queries to inspect the data in the database.
+We looked at the number of employees, the number of clients, the average salary, the average
+salary by gender, and so on. To do this, we used functions such as COUNT() and AVG().
+
+-------------------------------------------------------
+Wildcards:
+-------------------------------------------------------
+
+Now, we are going to use wildcards in some of our queries. A wildcard in SQL is a special 
+character that allows you to match patterns inside text values. In other words, if you 
+want to search for employees whose names contain only certain letters, you can do it with a wildcard.
+
+This tool is extremely useful in real-world business scenarios.
+For example, many companies include abbreviations like LLC in their name, and using 
+wildcards makes it easy to locate them without knowing the full string.
+
+Wildcards operators:
+
+"%" Matches zero or more characters. EXAMPLES: 
+'A%' → anything starting with A
+'%ing' → anything ending with “ing”
+'%car%' → anything containing “car”
+
+"_" Matches exactly one character.
+'A_n' → matches “Ann”, “Arn”, “A*n”
+'C_r' → matches “Car”, “Cor”, “C1r”…
+
+You typically use them with the LIKE operator:
+
+SELECT *
+FROM employee
+WHERE name LIKE '%LLC%';
+
+This pattern finds every employee whose name contains “LCC” anywhere in the text.
+Wildcards allow users to extract information even when they only know part of a string, 
+making them perfect for flexible searches, filtering, and text exploration inside databases.
+
+-------------------------------------------------------
+Unions:
+-------------------------------------------------------
+
+There are moments when we need to run queries that require data from two or more tables.
+In these cases, UNION becomes useful. A UNION in SQL is an operator that combines the 
+results of two or more SELECT statements into a single result set.
+
+For a UNION to work:
+
+Each SELECT must return the same number of columns.The corresponding columns must have compatible data types.
+Column names will be taken from the first SELECT. UNION automatically removes duplicate rows.
+If you want to keep duplicates, you must use UNION ALL.
+
+Unlike JOINs, a UNION does not merge rows by relationships.It simply stacks the results on top of each other.
+
+For example, if we want to get all employee names, client names, and supplier names, we can write:
+
+SELECT first_name AS name
+FROM employee
+UNION
+SELECT client_name
+FROM client
+UNION
+SELECT supplier_name
+FROM branch_supplier;
+
+This returns a single column list containing all distinct names from the three tables.
+If you want to include duplicates, use UNION ALL: 
+
+SELECT first_name AS name FROM employee
+UNION ALL
+SELECT client_name FROM client
+UNION ALL
+SELECT supplier_name FROM branch_supplier;
+
+-------------------------------------------------------
+Joins:
+-------------------------------------------------------
+
+A distinctive feature of SQL is that you can combine information from 
+multiple tables. JOIN is the keyword used to relate data from different 
+tables based on matching values, usually through primary keys and 
+foreign keys. If we want to access information that depends on another 
+table, we must use a JOIN.
+
+UNION, on the other hand, does not create relationships. It simply 
+stacks the results of two queries as long as they have the same number 
+of columns and compatible data types. UNION works vertically (row by row); 
+JOIN works horizontally (column by column through relationships).
+
+For example, if a branch table stores a manager ID and we want the 
+manager's name, we need a JOIN:
+
+SELECT employee.emp_id, employee.first_name, branch_name
+FROM employee
+JOIN branch
+ON employee.emp_id = branch.mgr_id;
+
+This behaves like selecting from the branch table, but instead of 
+displaying only the mgr_id, it retrieves the full employee information 
+related to that manager. Now we are going to see the differences between 
+the types of joins.
+
+JOIN:
+JOIN filters information by returning only rows where both tables have 
+matching values. If there is no match, the row does not appear. 
+It is the most common type of join and represents the intersection 
+of both tables.
+
+LEFT JOIN:
+A LEFT JOIN guarantees that every row from the left table (the table 
+written before JOIN) appears in the result. Then SQL tries to match 
+each row with data from the right table. If no match exists, the 
+columns from the right table appear as NULL. It represents all rows 
+from the left table plus any matching rows from the right one.
+
+RIGHT JOIN:
+A RIGHT JOIN is the opposite of a LEFT JOIN. It guarantees that all 
+rows from the right table appear. After that, SQL tries to match 
+rows from the left table. If there is no match, the left-side columns 
+appear as NULL.
+
+Conceptually it works the same as LEFT JOIN, but from the opposite side. 
+RIGHT JOIN is less commonly used because most queries naturally start 
+from the "main" table on the left.
+
+FULL JOIN:
+A FULL JOIN combines the logic of LEFT JOIN and RIGHT JOIN.
+It returns all rows from both tables, even when there are no matches.
+When a match exists, the rows are combined. When it does not, the 
+missing side appears as NULL. It represents the union of all rows 
+from both tables, matched where possible.
+
+NATURAL JOIN:
+A NATURAL JOIN automatically joins tables using all columns that share 
+the same name. The user does not specify an ON condition. SQL detects 
+matching column names and uses them as join keys.
+
+This type of join is risky because it depends on column names rather 
+than explicit logic. If a new column with the same name is added to 
+either table, the join may change unexpectedly. For this reason, 
+NATURAL JOIN is rarely used in professional environments.
+

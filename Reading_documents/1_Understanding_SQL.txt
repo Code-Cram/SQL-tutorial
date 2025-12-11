@@ -1,0 +1,232 @@
+
+WHAT IS A DATABASE:
+
+A database is any collection of information. The most accurate definition of a database is a collection 
+of data or information with attributes. For example, we might have a collection of phone numbers with some 
+attributes, such as the contact’s name or their Gmail address.
+
+We can also add that this information has some correlation between the data and the attributes.
+If we have a database of fruits, the attributes might be type_of_fruit, quantity, or maturity.
+
+Besides, a database is designed to be accessible to anyone who has permission to access it.
+
+
+
+HOW WE CAN CREATE A DATABASE:
+
+Let’s continue. We are currently on a PC, because it is the most common place where the highest percentage 
+of databases is stored. A database can be a .txt file or an Excel file. The main idea is that if we have some
+type of information or data, we can create a database.
+
+These types of databases can also be created using specific software. This software creates, modifies, and 
+organizes databases. It is a specific type of software with the single purpose of managing databases. This 
+software acts as an intermediary between the user and the database. It also guarantees a secure environment for your data.
+
+Last but not least, this type of software has its own language. With this language, the user can interact with 
+the database and extract the information they want. In conclusion, these tools allow the user to write programs 
+and interact with databases using a language, and all of this is possible because there is software in the middle.
+
+
+
+SQL – TABLE STRUCTURE:
+
+First of all, a structure is the way a group of data can be implemented. That is to say, it is the form of a group 
+of information or data. The main difference between a database and a structure is that the structure represents the
+logical form of the grouping of data.
+
+In the relational model, the structure is the table. A table is composed of rows and columns. The rows contain the 
+main information, and the columns contain the attributes of the data. Some data can be repeated, like a name or a 
+favorite color. This is the main reason why an ID exists. The ID is the primary key of a table. It is the only 
+attribute that is unique.
+
+For example, in a database of phone numbers, we might have three identical names. To identify the differences, we 
+look at the phone number because each person has a personal number. In this case, the personal number is the primary key.
+
+
+
+FOREIGN KEYS AND DATA RELATIONSHIPS:
+
+Let's continue. We have already discussed that a primary key is the unique identifier of a table. Now we need to
+understand how tables relate to each other. This is where the concept of a foreign key comes into play.
+
+A foreign key is an attribute or set of attributes in one table that references the primary key of another table.
+For example, if we have a database of students and courses, we might have three tables: STUDENT, COURSE, and REGISTRATION.
+The REGISTRATION table would contain the student_id and course_id as foreign keys, which reference the primary keys of the
+STUDENT and COURSE tables respectively.
+
+The main purpose of foreign keys is to maintain referential integrity. This means that a foreign key value must either
+match a primary key value in the referenced table, or be null. For instance, you cannot register a student for a course 
+if that student doesn't exist in the STUDENT table.
+
+Foreign keys also help us understand the relationships between different entities in our database. These relationships 
+are essential for organizing data correctly and avoiding redundancy.
+
+
+
+CARDINALITY IN RELATIONSHIPS:
+
+When we talk about relationships between tables, we need to understand cardinality. Cardinality expresses how many 
+instances of one entity can be related to instances of another entity. There are three main types:
+
+One-to-One (1:1): This is when one instance of an entity is related to exactly one instance of another entity. 
+For example, if we have a database where each employee has exactly one employee badge, this would be a one-to-one 
+relationship. In practice, these relationships are less common.
+
+One-to-Many (1:N): This is the most common type of relationship. One instance of an entity can be related to many 
+instances of another entity, but not vice versa. For example, one customer can have many orders, but each order 
+belongs to only one customer. In our tables, this means the "many" side will have a foreign key pointing to the "one" side.
+
+Many-to-Many (N:M): This is when many instances of one entity can be related to many instances of another entity. 
+For example, many students can enroll in many courses. To implement this type of relationship in a relational database, 
+we need an intermediary table (also called a junction table or bridge table) that contains foreign keys from both tables.
+
+
+
+DATA INTEGRITY AND CONSTRAINTS:
+
+Data integrity is fundamental to maintaining the accuracy and consistency of data in our database. To guarantee 
+this integrity, we use constraints. Constraints are rules imposed on the data columns of a table. They ensure 
+that the data entered into the database is valid and maintains consistency.
+
+The main types of constraints are:
+
+Primary Key Constraint: This ensures that the primary key column contains unique values and no null values. 
+Every table should have a primary key to uniquely identify each record.
+
+Foreign Key Constraint: This maintains referential integrity between two related tables. It ensures that a 
+value in the foreign key column must exist as a primary key in the referenced table.
+
+Unique Constraint: This ensures that all values in a column are different from each other. Unlike the primary 
+key, a unique constraint can accept null values, and a table can have multiple unique constraints.
+
+Not Null Constraint: This ensures that a column cannot have a null value. This is important for attributes 
+that must always have a value.
+
+Check Constraint: This ensures that all values in a column satisfy a specific condition. For example, 
+we could have a check constraint that ensures age is greater than 0.
+
+These constraints help us maintain the quality and reliability of our data. When we try to insert, update, 
+or delete data that violates these constraints, the database management system will reject the operation and 
+display an error message.
+
+
+
+HANDLING NULL VALUES:
+
+Null is a special value in databases that represents missing or unknown information. It is important to 
+understand that null is not the same as zero or an empty string. Null simply means "no value" or "value unknown."
+
+Null values can appear in a database for several reasons. Maybe the information was not available at the 
+time of data entry, or maybe the attribute is optional and the user chose not to provide it. For example, 
+in a database of phone numbers, some people might not have a Gmail address attribute filled in.
+
+However, null values can cause problems in our database. They can affect calculations, comparisons, and aggregations. 
+For instance, if we try to calculate the average of a column that contains null values, those null values are 
+typically ignored in the calculation.
+
+To handle null values properly, we have several approaches. The cascade method simply removes all instances 
+that have any null attribute. The on update method replaces all null attributes with other values, such as 
+the mean, median, mode, or any other replacement value. But we must be very careful when deciding whether 
+to delete a tuple or not, because the integrity of the data can be affected.
+
+In cases where we delete a tuple from a relation that is referenced by another relation, we can reject the 
+operation, delete the tuples that are also related to the deleted tuple in all relations where that data 
+appears, or we can set null values for the corresponding attributes.
+
+
+
+DATABASE LANGUAGES - DCL, DDL, AND DML:
+
+A database management system has different languages depending on the specification and purpose. 
+These languages allow us to interact with the database in different ways.
+
+Data Control Language (DCL): This language is focused on managing users and controlling the security 
+of the database. It includes commands that allow administrators to grant or revoke permissions to users. 
+For example, deciding who can read data, who can modify it, and who can delete it.
+
+Data Definition Language (DDL): This language is focused on defining the schema of the database, as 
+well as the rules and constraints that guarantee the security and integrity of the database. 
+With DDL, we can create tables, modify their structure, and delete them. Common DDL commands 
+include CREATE, ALTER, and DROP.
+
+Data Manipulation Language (DML): This is what allows us to access and modify the different data in 
+the database. SQL is typically used as a DML, and it was invented in 1970 as a relational model that 
+defines databases in the form of tables. With DML, we can insert new records, update existing records, 
+delete records, and query data. Common DML commands include SELECT, INSERT, UPDATE, and DELETE.
+
+These three categories of database languages work together to provide complete control over the database system. 
+Administrators use DCL to control access, developers use DDL to design the structure, and all users use DML to 
+interact with the data.
+
+
+
+NORMALIZATION AND NORMAL FORMS:
+
+Normalization is a systematic process of organizing data in a database to reduce redundancy and improve data 
+integrity. The goal is to design a database that is well-structured and efficient. A well-designed database 
+has the following characteristics:
+
+It does not have redundant storage. That is to say, there is no duplication of data.
+There is no loss of extra information when deleting certain variables or tuples.
+There is an impossibility of storing certain information that doesn't belong in the database structure.
+
+To achieve this, we use normal forms. There are several normal forms, but the most important are the first three:
+
+First Normal Form (1NF): 
+The database must ensure that its data is atomic. That is to say, that it forms 
+indivisible parts. For example, "name" can be separated into "first_name" and "last_name." Therefore, it 
+is not indivisible. Non-indivisible or non-atomic attributes can result in duplication or redundancy. To 
+comply with 1NF, each column must contain only atomic values, and each column must contain values of a single type.
+
+Second Normal Form (2NF):
+The second form consists of ensuring that attributes that are not primary keys 
+depend on the primary keys. That is to say, that they have a total relationship. If in a table we have 
+several keys such as customer_name or customer_id, the keys that are not primary have to depend on the 
+primary key. For example, customer_name depends on the existence of a customer_id. To better develop the 
+database, we will tend to divide it into sub-attributes so that information is not lost. For example: 
+REGISTRATION(student_id, student_name, course_id, course_name) should be divided into three: 
+STUDENT(student_id, student_name), COURSE(course_id, course_name), and REGISTRATION(student_id, course_id).
+
+Third Normal Form (3NF): 
+This database has to ensure that attributes do not have transitive dependency. That is to say, that one 
+attribute does not depend on another non-key attribute. If customer_name changes when customer_id changes, 
+but through another attribute, then the third form is not being fulfilled. To solve this, we must generate 
+more records and tables as in the second form.
+
+By following these normal forms, we ensure that our database is efficient, reduces redundancy, maintains 
+data integrity, and is easier to maintain over time.
+
+
+
+ACID PROPERTIES AND TRANSACTIONS:
+
+When we work with databases, we need to ensure that operations are performed correctly and consistently. 
+This is especially important when multiple operations need to be performed together as a single unit of work. 
+This unit of work is called a transaction.
+
+A transaction is a sequence of operations performed as a single logical unit of work. For a database to maintain 
+integrity and consistency, transactions must follow the ACID properties:
+
+Atomicity: 
+When a number of actions are performed, they must all be performed or none at all. If a part of the transaction 
+or action fails, all the others stop executing, avoiding problems. For example, in a bank transfer, if we deduct 
+money from one account but fail to add it to another account, the entire transaction should be rolled back.
+
+Consistency: 
+Once an action is performed, all the rules imposed by the database must be maintained both before and after 
+performing the action. These are rules or constraints. The database must remain in a valid state before and 
+after the transaction. For example, if there is a constraint that account balance cannot be negative, the 
+transaction must ensure this constraint is not violated.
+
+Isolation: 
+Actions are isolated from each other so that they do not interfere with the different processes executed 
+by the database or the program that manipulates the database. Every action that is performed should feel 
+like it is the only one. This prevents concurrent transactions from interfering with each other.
+
+Durability: 
+These actions must persist over time once the action has been successfully completed. Therefore, the data 
+must be maintained even when the system fails, being stored safely and efficiently. Once a transaction is 
+committed, its effects are permanent, even in the event of system failures.
+
+These ACID properties are fundamental to ensuring that our database remains reliable and maintains data integrity, 
+even in situations of system failures or concurrent access by multiple users.
