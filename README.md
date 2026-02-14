@@ -1,5 +1,10 @@
 # SQL Tutorial
 
+[![SQL](https://img.shields.io/badge/SQL-Tutorial-blue)](https://github.com/Code-Cram/SQL-tutorial)
+[![MySQL](https://img.shields.io/badge/MySQL-compatible-orange)](https://www.mysql.com/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-compatible-blue)](https://www.postgresql.org/)
+[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+
 As a Data Science student, I created this SQL tutorial to help anyone who wants to learn the fundamentals of SQL. This tutorial is based on my own classes and the FreeCodeCamp SQL tutorial on YouTube. It includes explanations, examples, and queries to help you understand how SQL works. Enjoy the knowledge
 
 This tutorial was created by me (Marc Martínez Arias), but the resources and workflow are based on GirrafeAcademy. The SQL tutorial video can be found here: [FreeCodeCamp SQL Tutorial](https://www.youtube.com/watch?v=HXV3zeQKqGY&t=13095s). Additionally, I added extra resources from my classes, including summaries of the content.  
@@ -24,3 +29,59 @@ This tutorial has two main parts:
   - Also includes a `csv` folder. The purpose of this folder is to allow users to import the data into other tools or languages, or to export it if needed.
 
 ![Company_database](Database_company/Company_database.png)
+
+## What is covered
+
+- SQL basics and syntax
+- Data types and constraints
+- SELECT queries and filtering
+- JOINs and relationships
+- Aggregate functions
+- Subqueries
+- Database design principles
+- Practical company database example
+
+## How to use this tutorial
+
+1. Clone this repository:
+```bash
+git clone https://github.com/Code-Cram/SQL-tutorial.git
+cd SQL-tutorial
+```
+
+2. Choose your preferred SQL engine (MySQL or PostgreSQL)
+
+3. Follow the numbered files in order:
+   - Start with `SQL_concepts`
+   - Practice with `Example_queries`
+   - Build the complete example in `Database_company`
+
+4. Watch the [FreeCodeCamp SQL Tutorial](https://www.youtube.com/watch?v=HXV3zeQKqGY&t=13095s) alongside this repository
+
+## Requirements
+
+- MySQL or PostgreSQL installed
+- A SQL client (MySQL Workbench, pgAdmin, DBeaver, or similar)
+- Basic understanding of databases (helpful but not required)
+
+## Contact
+
+**Marc Martínez Arias**
+- GitHub: [@Code-Cram](https://github.com/Code-Cram)
+- Gmail: marcmartinezarias48@gmail.com
+
+## License
+
+This project is free to use for educational purposes.
+
+## Acknowledgments
+
+- [GirrafeAcademy](https://www.youtube.com/@GiraffeAcademy) for the original tutorial structure
+- [FreeCodeCamp](https://www.freecodecamp.org/) for the comprehensive SQL video tutorial
+- My university professors for additional resources and knowledge
+
+---
+
+If you find this tutorial helpful, please consider giving it a star!
+
+**Tags:** `sql` `sql-tutorial` `learn-sql` `mysql` `postgresql` `database` `data-science` `beginner-friendly`
